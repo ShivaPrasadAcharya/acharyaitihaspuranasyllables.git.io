@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>आचार्यस्तरीयः पाठ्यक्रमः – इतिहासपुराणम्</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="syllables.js"></script>
+<style>
+  :root {
+    --saffron:    #C45E0A;
+    --deep-gold:  #8B5E0A;
+    --gold:       #D4943A;
+    --gold-light: #F2C97E;
+    --cream:      #FDF6E8;
+    --parchment:  #F5E8C8;
+    --brown:      #3B1F0A;
+    --brown-mid:  #5C3310;
+    --red-accent: #8B1A1A;
+    --border:     #C9A96E;
+    --shadow:     rgba(59,31,10,0.18);
+    --text:       #2A1505;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Noto Serif Devanagari', serif;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, var(--brown) 0%, var(--brown-mid) 60%, var(--deep-gold) 100%);
+    color: var(--gold-light);
+    text-align: center;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.07'%3E%3Cpath d='M30 0L60 30 30 60 0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+  header .om {
+    font-size: 2.8rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: .4rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 6px var(--gold), 0 2px 8px rgba(0,0,0,.5); }
+    to   { text-shadow: 0 0 18px var(--gold-light), 0 2px 8px rgba(0,0,0,.5); }
+  }
+  header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--gold-light);
+    text-shadow: 0 2px 6px rgba(0,0,0,.4);
+    margin-bottom: .4rem;
+  }
+  header h2 {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    color: var(--gold);
+    border-top: 1px solid rgba(201,169,110,.3);
+    border-bottom: 1px solid rgba(201,169,110,.3);
+    display: inline-block;
+    padding: .3rem 1.5rem;
+    margin-top: .4rem;
+  }
+
+  /* ── LAYOUT ─────────────────────────────────────────────────── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.2rem 4rem; }
+
+  /* ── NAV ─────────────────────────────────────────────────────── */
+  nav {
+    background: var(--brown);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--gold);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav a {
+    display: inline-block;
+    color: var(--gold-light);
+    text-decoration: none;
+    padding: .7rem 1.1rem;
+    font-size: .88rem;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    transition: background .2s, color .2s;
+  }
+  nav a:hover { background: var(--deep-gold); color: #fff; }
+
+  /* ── SECTIONS ────────────────────────────────────────────────── */
+  section { margin-top: 2.5rem; }
+  .section-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 16px var(--shadow);
+    margin-bottom: 2rem;
+    animation: fadeUp .5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .section-card:nth-child(2) { animation-delay:.08s; }
+  .section-card:nth-child(3) { animation-delay:.16s; }
+  .section-card:nth-child(4) { animation-delay:.24s; }
+  .section-card:nth-child(5) { animation-delay:.32s; }
+
+  .card-header {
+    background: linear-gradient(90deg, var(--brown) 0%, var(--brown-mid) 100%);
+    color: var(--gold-light);
+    padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: .7rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-header h3 { font-size: 1.05rem; font-weight: 600; flex: 1; }
+  .card-header .toggle {
+    font-size: 1.1rem; color: var(--gold); transition: transform .3s;
+    flex-shrink: 0;
+  }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 1.5rem; display: none; }
+  .card-body.open { display: block; }
+
+  /* ── TYPOGRAPHY ──────────────────────────────────────────────── */
+  h4 {
+    color: var(--brown);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.2rem 0 .5rem;
+    padding-left: .6rem;
+    border-left: 3px solid var(--gold);
+  }
+  p { margin-bottom: .9rem; font-size: .96rem; }
+  ul { padding-left: 1.4rem; margin-bottom: .9rem; }
+  li { margin-bottom: .3rem; font-size: .94rem; }
+
+  /* ── TABLES ──────────────────────────────────────────────────── */
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: .9rem;
+  }
+  th {
+    background: var(--brown);
+    color: var(--gold-light);
+    padding: .6rem .9rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: .55rem .9rem;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #fdf3e3; }
+  tr.total-row td {
+    background: #f0e0c0;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  /* ── PAPER NAV TABS ─────────────────────────────────────────── */
+  .paper-tabs {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-bottom: 1.2rem;
+  }
+  .paper-tab {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: .45rem .9rem;
+    cursor: pointer;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: .88rem;
+    transition: background .2s, color .2s;
+  }
+  .paper-tab.active {
+    background: var(--brown);
+    color: var(--gold-light);
+    border-color: var(--brown);
+  }
+  .paper-pane { display: none; }
+  .paper-pane.active { display: block; }
+
+  /* ── PRAKARANA TABS ──────────────────────────────────────────── */
+  .prak-tabs {
+    display: flex; flex-wrap: wrap; gap: .4rem;
+    margin: 1rem 0 .8rem;
+  }
+  .prak-tab {
+    background: #fff;
+    border: 1.5px solid var(--gold);
+    color: var(--brown-mid);
+    border-radius: 20px;
+    padding: .3rem .8rem;
+    cursor: pointer;
+    font-size: .88rem;
+    transition: all .2s;
+  }
+  .prak-tab.active, .prak-tab:hover {
+    background: var(--gold);
+    color: var(--brown);
+    border-color: var(--gold);
+  }
+  .prak-pane { display: none; }
+  .prak-pane.active { display: block; animation: fadeUp .3s ease; }
+
+  /* ── PRAKARANA DETAIL CARD ─────────────────────────────────── */
+  .prak-detail {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.1rem 1.3rem;
+    font-size: .93rem;
+  }
+  .prak-detail strong { color: var(--red-accent); }
+
+  /* ── INFO GRID ──────────────────────────────────────────────── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: .7rem;
+    margin: .8rem 0 1.2rem;
+  }
+  .info-chip {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: .5rem .8rem;
+    text-align: center;
+    font-size: .85rem;
+  }
+  .info-chip .label { color: var(--brown-mid); font-size: .76rem; display: block; }
+  .info-chip .val { color: var(--brown); font-weight: 700; font-size: 1rem; }
+
+  /* ── OBJECTIVE LIST ─────────────────────────────────────────── */
+  .obj-list {
+    counter-reset: obj;
+    padding: 0; list-style: none;
+  }
+  .obj-list li {
+    counter-increment: obj;
+    padding: .45rem .8rem .45rem 2.2rem;
+    position: relative;
+    border-bottom: 1px solid #f0dfc0;
+    font-size: .93rem;
+  }
+  .obj-list li::before {
+    content: counter(obj, devanagari);
+    position: absolute; left: .4rem;
+    color: var(--saffron); font-weight: 700;
+  }
+
+  /* ── REFERENCE BOX ──────────────────────────────────────────── */
+  .ref-box {
+    background: #fff8ee;
+    border-left: 4px solid var(--gold);
+    padding: .8rem 1rem;
+    margin-top: .6rem;
+    font-size: .88rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .ref-box h5 { color: var(--brown-mid); margin-bottom: .3rem; font-size: .9rem; }
+  .ref-box li { margin-bottom: .2rem; }
+
+  /* ── DIVIDER ────────────────────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 1.5rem 0;
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────────────── */
+  footer {
+    background: var(--brown);
+    color: var(--gold-light);
+    text-align: center;
+    padding: 1.2rem;
+    font-size: .85rem;
+    margin-top: 3rem;
+  }
+  footer span { color: var(--gold); }
+
+  /* ── PRINT ──────────────────────────────────────────────────── */
+  @media print {
+    nav { display: none; }
+    .card-body { display: block !important; }
+    .section-card { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .card-header h3 { font-size: .93rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="om">ॐ</span>
+  <h1 id="main-title"></h1>
+  <h2 id="main-subtitle"></h2>
+</header>
+
+<nav id="main-nav"></nav>
+
+<div class="container">
+
+  <!-- §1 प्रवेशाहर्ता -->
+  <section id="sec-pravesh">
+    <div class="section-card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <h3 id="pravesh-heading"></h3>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="card-body open" id="pravesh-body"></div>
+    </div>
+  </section>
+
+  <!-- §2 उद्देश्यानि -->
+  <section id="sec-uddeshya">
+    <div class="section-card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <h3 id="uddeshya-heading"></h3>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="card-body open" id="uddeshya-body"></div>
+    </div>
+  </section>
+
+  <!-- §3 पाठ्यक्रमस्वरूपम् -->
+  <section id="sec-svarupa">
+    <div class="section-card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <h3>३. पाठ्यक्रमस्वरूपम्</h3>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="card-body open" id="svarupa-body"></div>
+    </div>
+  </section>
+
+  <!-- Papers 1–5 -->
+  <section id="sec-papers">
+    <div class="section-card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <h3>पत्रविवरणम् — खण्डः प्रथमः (पत्र १–५)</h3>
+        <span class="toggle">▼</span>
+      </div>
+      <div class="card-body open" id="papers-body"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>आचार्यस्तरीयः पाठ्यक्रमः</span> — विषयः: इतिहासपुराणम् | खण्डः प्रथमः
+</footer>
+
+<script>
+// ── helpers ───────────────────────────────────────────────────────
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('open');
+}
+
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+function makeTable(headers, rows, totalRow) {
+  const wrap = el('div','table-wrap');
+  const t = document.createElement('table');
+  const thead = document.createElement('thead');
+  const hr = document.createElement('tr');
+  headers.forEach(h => { const th = document.createElement('th'); th.innerHTML = h; hr.appendChild(th); });
+  thead.appendChild(hr); t.appendChild(thead);
+  const tbody = document.createElement('tbody');
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    r.forEach(c => { const td = document.createElement('td'); td.innerHTML = c; tr.appendChild(td); });
+    tbody.appendChild(tr);
+  });
+  if (totalRow) {
+    const tr = document.createElement('tr'); tr.className = 'total-row';
+    totalRow.forEach(c => { const td = document.createElement('td'); td.innerHTML = c; tr.appendChild(td); });
+    tbody.appendChild(tr);
+  }
+  t.appendChild(tbody); wrap.appendChild(t);
+  return wrap;
+}
+
+// ── MAIN RENDER ───────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const d = syllabusData;
+
+  // Header
+  document.getElementById('main-title').textContent = d.title;
+  document.getElementById('main-subtitle').textContent = d.subtitle;
+
+  // Nav
+  const nav = document.getElementById('main-nav');
+  [
+    ['#sec-pravesh','प्रवेशाहर्ता'],
+    ['#sec-uddeshya','उद्देश्यानि'],
+    ['#sec-svarupa','पाठ्यक्रमस्वरूपम्'],
+    ['#sec-papers','पत्र १'],
+  ].forEach(([href, label], i) => {
+    const a = document.createElement('a'); a.href = href; a.textContent = label;
+    nav.appendChild(a);
+  });
+  // Paper tabs in nav
+  d.papers.forEach((p,i) => {
+    const a = document.createElement('a');
+    a.href = '#paper-'+p.id;
+    a.textContent = 'पत्र '+(i+1);
+    nav.appendChild(a);
+  });
+
+  // §1 प्रवेशाहर्ता
+  document.getElementById('pravesh-heading').textContent = d.section1.heading;
+  const pb = document.getElementById('pravesh-body');
+  d.section1.items.forEach(item => {
+    pb.appendChild(el('p', '', `<strong>${item.label}</strong> ${item.text}`));
+  });
+
+  // §2 उद्देश्यानि
+  document.getElementById('uddeshya-heading').textContent = d.section2.heading;
+  const ub = document.getElementById('uddeshya-body');
+  const ol = el('ol','obj-list');
+  d.section2.items.forEach(i => { ol.appendChild(el('li','',i.text)); });
+  ub.appendChild(ol);
+
+  // §3 पाठ्यक्रमस्वरूपम्
+  const sb = document.getElementById('svarupa-body');
+  d.section3.khandas.forEach(kh => {
+    sb.appendChild(el('h4','','खण्डः '+kh.name));
+    const rows = kh.papers.map(p => [p.name, p.content, p.marks]);
+    const total = ['','योगः', kh.total];
+    sb.appendChild(makeTable(['पत्रम्','विषयः','अङ्काः'], rows, total));
+  });
+  sb.appendChild(el('p','',`<strong>महायोगः: ${d.section3.grandTotal} अङ्काः</strong>`));
+
+  // Papers
+  const papersBody = document.getElementById('papers-body');
+  const tabBar = el('div','paper-tabs');
+  papersBody.appendChild(tabBar);
+
+  d.papers.forEach((paper, pi) => {
+    // Tab button
+    const tab = el('div','paper-tab'+(pi===0?' active':''), `पत्र ${pi+1} — ${paper.pathyamshanam}`);
+    tab.dataset.pane = 'pane-'+paper.id;
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.paper-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.paper-pane').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('pane-'+paper.id).classList.add('active');
+      document.getElementById('paper-'+paper.id).scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    tabBar.appendChild(tab);
+
+    // Pane
+    const pane = el('div','paper-pane'+(pi===0?' active':''));
+    pane.id = 'pane-'+paper.id;
+    pane.setAttribute('id', 'pane-'+paper.id);
+    papersBody.appendChild(pane);
+
+    // Anchor
+    const anchor = document.createElement('div');
+    anchor.id = 'paper-'+paper.id;
+    pane.appendChild(anchor);
+
+    // Title bar
+    const titleBar = el('div','',`<h4 style="margin:0 0 .8rem;font-size:1.1rem;border-left:4px solid var(--saffron);padding-left:.7rem;color:var(--brown);">
+      पत्र ${pi+1} — ${paper.patraName}<br>
+      <span style="font-size:.9rem;font-weight:400;color:var(--brown-mid);">${paper.pathyamshanam}</span>
+    </h4>`);
+    pane.appendChild(titleBar);
+
+    // Info chips
+    const grid = el('div','info-grid');
+    [{l:'खण्डः',v:paper.khanda},{l:'वार्षिकभारः',v:paper.varshikBhar},
+     {l:'पूर्णाङ्काः',v:paper.purnankas},{l:'उत्तीर्णाङ्काः',v:paper.uttirnankas},
+     {l:'समयः',v:paper.samaya}].forEach(({l,v}) => {
+      grid.appendChild(el('div','info-chip',`<span class="label">${l}</span><span class="val">${v}</span>`));
+    });
+    pane.appendChild(grid);
+
+    // परिचय
+    if(paper.parichaya) {
+      pane.appendChild(el('h4','','२. पाठ्यांशपरिचयः'));
+      pane.appendChild(el('p','',paper.parichaya));
+    }
+
+    // Prakarana intro list
+    if(paper.prakarana_intro) {
+      pane.appendChild(el('h4','','प्रकरणसंक्षेपः'));
+      paper.prakarana_intro.forEach(pr => {
+        pane.appendChild(el('p','',`<strong>${pr.id}-प्रकरणे–</strong> ${pr.text}`));
+      });
+    }
+
+    // सामान्योद्देश्यानि
+    if(paper.samanya_uddeshya) {
+      pane.appendChild(el('h4','','३. पाठ्यांशस्य सामान्योद्देश्यानि'));
+      pane.appendChild(el('p','',paper.samanya_uddeshya.intro));
+      const ul = el('ul');
+      paper.samanya_uddeshya.items.forEach(i => ul.appendChild(el('li','',i)));
+      pane.appendChild(ul);
+    }
+
+    // विशिष्टोद्देश्यानि
+    if(paper.vishishtha_uddeshya) {
+      pane.appendChild(el('h4','','४. पाठ्यांशस्य विशिष्टोद्देश्यानि'));
+      paper.vishishtha_uddeshya.forEach(u => {
+        pane.appendChild(el('p','',`<strong>${u.label}</strong> ${u.text}`));
+      });
+    }
+
+    // प्रकरणविभाग table
+    if(paper.prakarana_table) {
+      pane.appendChild(el('h4','','५. प्रकरणविभागः पाठ्यवस्तुविवरणञ्च'));
+      const rows = paper.prakarana_table.map(r => [r.id, r.content, r.ankah, r.pathah]);
+      const totalAnkah = paper.prakarana_table.reduce((s,r)=>s+parseInt(r.ankah||0),0);
+      const totalPathah = paper.prakarana_table.reduce((s,r)=>s+parseInt(r.pathah||0),0);
+      pane.appendChild(makeTable(
+        ['प्रकरणानि','पाठ्यांशाः','अङ्काः','पाठाः'],
+        rows,
+        ['','योगः', totalAnkah+'', totalPathah+'']
+      ));
+    }
+
+    // पाठ्यवस्तुविवरणम् (detailed)
+    if(paper.vastuvivarana) {
+      pane.appendChild(el('h4','','६. पाठ्यवस्तुविवरणम्'));
+
+      const prakTabs = el('div','prak-tabs');
+      const prakPanes = el('div');
+      pane.appendChild(prakTabs);
+      pane.appendChild(prakPanes);
+
+      paper.vastuvivarana.forEach((v, vi) => {
+        const ptab = el('div','prak-tab'+(vi===0?' active':''), v.id+'-प्रकरणे');
+        ptab.dataset.pane = 'pp-'+paper.id+'-'+v.id;
+        ptab.addEventListener('click', () => {
+          prakTabs.querySelectorAll('.prak-tab').forEach(t=>t.classList.remove('active'));
+          prakPanes.querySelectorAll('.prak-pane').forEach(p=>p.classList.remove('active'));
+          ptab.classList.add('active');
+          document.getElementById('pp-'+paper.id+'-'+v.id).classList.add('active');
+        });
+        prakTabs.appendChild(ptab);
+
+        const ppane = el('div','prak-pane'+(vi===0?' active':''));
+        ppane.id = 'pp-'+paper.id+'-'+v.id;
+
+        const detail = el('div','prak-detail');
+        detail.appendChild(el('p','',`<strong>${v.title}</strong>`));
+        if(v.intro) detail.appendChild(el('p','',v.intro));
+        if(v.topics) detail.appendChild(el('p','',v.topics));
+        if(v.subheading) detail.appendChild(el('p','',`<strong>${v.subheading}</strong>`));
+        if(v.topics2) { detail.appendChild(el('p','',v.topics2)); }
+        if(v.subheading2) detail.appendChild(el('p','',`<strong>${v.subheading2}</strong>`));
+
+        ppane.appendChild(detail);
+        prakPanes.appendChild(ppane);
+      });
+    }
+
+    pane.appendChild(el('hr','divider'));
+
+    // Exam Pattern
+    if(paper.examPattern) {
+      pane.appendChild(el('h4','','वार्षिकपरीक्षाप्रश्नपत्रनिर्माणसारणी'));
+      const rows = paper.examPattern.prakaranaGroups.map(g =>
+        [g.prakaranas, g.type, g.prashthya, g.samadheya, g.perQ, g.total]
+      );
+      pane.appendChild(makeTable(
+        ['समूहाः (प्रकरणानि)','प्रश्नप्रकाराः','प्रष्टव्याः','समाधेयाः','प्रतिप्रश्मङ्काः','पूर्णाङ्काः'],
+        rows,
+        ['','योगः','१५','१०','–','८०']
+      ));
+    }
+
+    pane.appendChild(el('hr','divider'));
+
+    // References
+    if(paper.references) {
+      pane.appendChild(el('h4','','पाठ्यसामग्रीसूची'));
+      const ref = paper.references;
+      const refBox = el('div','ref-box');
+
+      if(ref.pathya) {
+        refBox.appendChild(el('h5','','(क) पाठ्यग्रन्थाः'));
+        const ul = el('ul'); ref.pathya.forEach(r => ul.appendChild(el('li','',r))); refBox.appendChild(ul);
+      }
+      if(ref.sahayak) {
+        refBox.appendChild(el('h5','','(ख) सहायकग्रन्थाः'));
+        const ul = el('ul'); ref.sahayak.forEach(r => ul.appendChild(el('li','',r))); refBox.appendChild(ul);
+      }
+      if(ref.sandarbha) {
+        refBox.appendChild(el('h5','','(ग) सन्दर्भग्रन्थाः'));
+        const ul = el('ul'); ref.sandarbha.forEach(r => ul.appendChild(el('li','',r))); refBox.appendChild(ul);
+      }
+      pane.appendChild(refBox);
+    }
+  }); // end papers.forEach
+});
+</script>
+</body>
+</html>
